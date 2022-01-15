@@ -1,0 +1,49 @@
+spring:
+  redis:
+    host: localhost
+    port: 6379
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            clientId: "fd922b298f787872cf51b6bd901efd8c"
+            redirectUri: "http://localhost:8080/login/oauth2/code/kakao"
+            clientAuthenticationMethod: POST
+            authorizationGrantType: "authorization_code"
+            scope: profile_nickname, profile_image, account_email
+            client-name: Kakao
+        provider:
+          kakao:
+            uri: https://kauth.kakao.com
+            token-uri: /oauth/token
+            user-info-uri: /v2/user/me
+  jwt:
+    token:
+      security-key: "secretKey"
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/study
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    generate-ddl: true
+    show-sql: true
+
+  application:
+    name: auth-service
+
+eureka:
+  instance:
+    instance-id: auth-ms-instance
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761//eureka
+
+server:
+  port: 8081
